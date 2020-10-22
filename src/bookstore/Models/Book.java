@@ -12,6 +12,12 @@ import java.util.Date;
  * @author chaym
  */
 public class Book {
-    String authors[];
-    Date publicationDate;
+   public  String authors;
+   public Date publicationDate;
+    public String title ;
+    
+	public Book() {
+		
+	}
+    
 }

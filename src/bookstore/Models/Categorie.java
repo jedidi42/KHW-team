@@ -10,5 +10,10 @@ package bookstore.Models;
  * @author chaym
  */
 public class Categorie {
-    String name;
+     public Categorie() {
+		
+		
+	}
+
+	public String name;
 }
