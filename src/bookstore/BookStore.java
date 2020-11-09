@@ -5,6 +5,9 @@
  */
 package bookstore;
 
+import classes.Utility;
+import java.util.Scanner;
+
 /**
  *
  * @author chaym
@@ -16,6 +19,15 @@ public class BookStore {
      */
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the quantity of books : ");
+        int qte = scanner.nextInt();
+
+        System.out.print("ENter the price of a book : ");
+        double prixU = scanner.nextInt();
+        double result = Utility.CalculateTotalPrice(qte, prixU);
+        System.out.print("the total price is = "+result);
     }
-    
+
 }
