@@ -7,34 +7,38 @@ package dao;
 
 import java.sql.*;
 
-
-
+import java.util.*;
 
 import entities.Book;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import java.time.LocalDate;
-import static java.time.LocalDate.from;
-import java.time.ZoneId;
-
-        /**
+/**
  *
  * @author waelk
  */
 public class DaoBook {
 
-  
-
     public static void addBook(Book book) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
-
+ try {
         String sql = "insert into book "
                 + " (title, price, author, releaseDate)" + " values (?, ?, ?, ?)";
         PreparedStatement myStmt = conn.prepareStatement(sql);
-        myStmt.setString(1, book.getTitle());
-        myStmt.setDouble(2, book.getPrice());
-        myStmt.setString(3, book.getAuthor());
-        myStmt.setDate(4,  book.getReleaseDate());
-        myStmt.executeUpdate();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date  date = sdf.parse(book.getReleaseDate().toString());
+
+            myStmt.setString(1, book.getTitle());
+            myStmt.setDouble(2, book.getPrice());
+            myStmt.setString(3, book.getAuthor());
+            myStmt.setDate(4, (new java.sql.Date(date.getTime())));
+            myStmt.executeUpdate();
+        } catch (ParseException ex) {
+            Logger.getLogger(DaoBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

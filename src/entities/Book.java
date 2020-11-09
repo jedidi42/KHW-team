@@ -1,6 +1,6 @@
 package entities;
 
-import java.time.LocalDate;
+
 import java.util.Date;
 
 public class Book {
@@ -11,7 +11,7 @@ public class Book {
     double price;
     Date  releaseDate;
 
-    public Book(String title, String author, double price, Date myDate) {
+    public Book(String title, String author, double price, Date releaseDate) {
         this.title = title;
         this.author = author;
         this.price = price;
