@@ -1,49 +1,25 @@
 package entities;
 
+import java.util.*;
 
-import java.util.Date;
 
 public class Book {
-
     int id;
-    String title;
-    String author;
-    double price;
-    Date  releaseDate;
-
-    public Book(String title, String author, double price, Date releaseDate) {
-        this.title = title;
-        this.author = author;
-        this.price = price;
-        this.releaseDate = releaseDate;
-    }
-
-    public int getId() {
-        return id;
-    }
+    String title ;
+    String author ;
+    double price ;
+    Date releaseDate;
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public double getPrice() {
-        return price;
     }
 
     public void setPrice(double price) {
@@ -58,10 +34,36 @@ public class Book {
         this.releaseDate = releaseDate;
     }
 
-    @Override
-    public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", price=" + price + ", releaseDate="
-                + releaseDate + "]";
+   
+
+    public int getId() {
+        return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+ 
+
+    @Override
+    public String toString() {
+        return "Book{" + "id=" + id + ", title=" + title + ", author=" + author + ", price=" + price + ", releaseDate=" + releaseDate + '}';
+    }
+
+    
+    
+   
+    
+    
+    
+    
 }

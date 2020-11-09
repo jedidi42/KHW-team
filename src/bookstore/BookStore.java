@@ -5,68 +5,79 @@
  */
 package bookstore;
 
-import java.util.*;
-import java.sql.Date;
-import java.util.Scanner;
+import dao.DaoBook;
 import entities.Book;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import static dao.DaoBook.addBook;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import static javax.print.attribute.Size2DSyntax.MM;
+import java.util.List;
+import java.util.Scanner;
+
+
 
 public class BookStore {
 
     /**
      * @param args the command line arguments
-     * @throws java.sql.SQLException
      */
-    private static final DateTimeFormatter PARSE_FORMATTER
-            = DateTimeFormatter.ofPattern("uuuu-M-d");
+    public static void main(String[] args) {
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
+            System.out.println(conn);
 
-    public static void main(String[] args) throws SQLException, ParseException {
+             Scanner scanner = new Scanner(System.in);
 
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.print("Enter the quantity of books : ");
-//        int qte = scanner.nextInt();
-//
-//        System.out.print("ENter the price of a book : ");
-//        double prixU = scanner.nextInt();
-//        double result = Utility.CalculateTotalPrice(qte, prixU);
-//        System.out.print("the total price is = "+result);
-        int choix = 0;
-        Scanner scanner = new Scanner(System.in);
-        while (choix != 3) {
-            System.out.println("1- display books ");
-            System.out.println("2- insert a new book");
-            System.out.println("Enter your choice");
-            Scanner scannerchoix = new Scanner(System.in);
-            choix = scannerchoix.nextInt();
-            if (choix == 2) {
-                System.out.println("Enter the book title: ");
-                String title = scanner.nextLine();
-                System.out.println("Enter th price : ");
-                double price = scanner.nextInt();
-                System.out.println("Enter the author : ");
-                Scanner scanner2 = new Scanner(System.in);
-                String author = scanner2.nextLine();
-                System.out.println("Please enter the release date (yyyy-mm-dd)");
-             
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date date = sdf.parse(scanner2.nextLine());
-             
-                System.out.println(date);
 
-                Book newbook = new Book(title, author, price, date);
-                addBook(newbook);
+            try {
 
+                int choix = 0;
+                while (choix != 3) {
+                    System.out.println("1- insert a new book ");
+                    System.out.println("2- list books ");
+                    System.out.println("3- exit ");
+                    System.out.println("Enter your choice plz");
+                    Scanner scannerchoix = new Scanner(System.in);
+                    choix = scannerchoix.nextInt();
+                    switch (choix) {
+                        case 1:
+                            Book myBook = new Book();
+                           
+                            System.out.println(" enter the title : ");
+                            myBook.setTitle(scanner.nextLine());
+                            System.out.println(" Enter the price : ");
+                            myBook.setPrice(Double.parseDouble(scanner.nextLine()));
+                            System.out.print(" Enter the author : ");
+                            myBook.setAuthor(scanner.nextLine());
+                            System.out.println(" Enter the release Date  : ");
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            java.util.Date date = sdf.parse(scanner.nextLine());
+
+                            myBook.setReleaseDate(new java.sql.Date(date.getTime()));
+                            DaoBook.addBook(myBook, conn);
+                            break;
+                        case 2:
+                            List<Book> myList = DaoBook.listBook(conn);
+                            for (Book book : myList) {
+                                System.out.println(book.toString());
+                            }
+                            break;
+
+                        default:
+                            System.out.print("your choice is incorrect ! ");
+                            break;
+                    }
+                }
+                 conn.close();
+            } catch (Exception e) {
+                System.out.println(e.getStackTrace()); conn.close();
             }
+        } catch (SQLException Se) {
+            System.out.println(Se);
         }
+        /**
+         * *************************
+         */
 
     }
 
