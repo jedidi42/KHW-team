@@ -9,7 +9,6 @@ public class DaoBook {
 	void addBook (Book book) {}
 	
 	 List<Book>listBook() {
-		 
-		 return (listBook()) ;
+		  return (listBook()) ;
 	 }
 }

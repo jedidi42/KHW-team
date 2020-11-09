@@ -8,10 +8,7 @@ package bookstore;
 import classes.Utility;
 import java.util.Scanner;
 
-/**
- *
- * @author chaym
- */
+
 public class BookStore {
 
     /**

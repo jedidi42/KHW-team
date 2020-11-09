@@ -5,10 +5,7 @@
  */
 package classes;
 
-/**
- *
- * @author waelk
- */
+
 public class Utility {
       public static double CalculateTotalPrice(int qte, double prixU) {
         return qte*prixU;
