@@ -61,10 +61,9 @@ public class DaoBook {
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(requete);
 
-       
-            boolean encore = result.next();
+            boolean counter = result.next();
             List<Book> listbooks = new ArrayList();
-            while (encore) {
+            while (counter) {
 
                 Book newbook = new Book();
                 newbook.setId(result.getInt("id"));
@@ -74,7 +73,7 @@ public class DaoBook {
                 Date date = result.getDate("releaseDate");
                 newbook.setReleaseDate(date);
                 listbooks.add(newbook);
-                encore = result.next();
+                counter = result.next();
             }
             result.close();
             return listbooks;
