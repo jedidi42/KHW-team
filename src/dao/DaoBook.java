@@ -46,7 +46,8 @@ public class DaoBook {
             java.util.Date date = sdf.parse(book.getReleaseDate().toString());
             stat.setDate(4, (new java.sql.Date(date.getTime())));
             stat.executeUpdate();
-           
+           System.out.print("the book is inserted !");
+                        System.out.println("**********************");
         } catch (SQLException ex) {
             Logger.getLogger(DaoBook.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,6 +75,7 @@ public class DaoBook {
                 newbook.setReleaseDate(date);
                 listbooks.add(newbook);
                 counter = result.next();
+                System.out.println("**********************");
             }
             result.close();
             return listbooks;
@@ -83,4 +85,31 @@ public class DaoBook {
         }
 
     }
+    
+    public static void modifyBook(int id, String title, double price, String author,Date daterelease, Connection conn) throws SQLException {
+        
+       
+                        String uquery = "update book set title = ?, price = ?, author = ?, releaseDate = ? where id = ? ";
+                        PreparedStatement preparedStmt = conn.prepareStatement(uquery);
+                        preparedStmt.setString(1, title);
+                        preparedStmt.setDouble(2, price);
+                         preparedStmt.setString(3, author);
+                          preparedStmt.setDate(4, (new java.sql.Date(daterelease.getTime())));
+                          preparedStmt.setInt(5, id);
+                       preparedStmt.executeUpdate();
+                 System.out.print("the book is updated !");
+                        System.out.println("**********************");
+
+    }
+    
+    public static void deleteBook (int id, Connection conn) throws SQLException {
+         
+        String delete = "DELETE from book WHERE id= ?";
+                        PreparedStatement prepareddelete = conn.prepareStatement(delete);
+                        prepareddelete.setInt(1, id);
+                        prepareddelete.executeUpdate();
+                        System.out.print("the book is deleted !");
+                        System.out.println("**********************");
+    }
+    
 }
