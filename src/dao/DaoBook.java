@@ -99,6 +99,7 @@ public class DaoBook {
                        preparedStmt.executeUpdate();
                  System.out.print("the book is updated !");
                         System.out.println("**********************");
+                        
 
     }
     
@@ -110,6 +111,7 @@ public class DaoBook {
                         prepareddelete.executeUpdate();
                         System.out.print("the book is deleted !");
                         System.out.println("**********************");
+                        
     }
     
 }

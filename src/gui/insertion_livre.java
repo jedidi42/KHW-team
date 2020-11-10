@@ -266,6 +266,7 @@ public class insertion_livre extends javax.swing.JFrame {
             java.util.Date date = sdf.parse(daterelease);
             myBook.setReleaseDate(new java.sql.Date(date.getTime()));
             DaoBook.addBook(myBook, conn);
+            
         } catch (ParseException ex) {
             Logger.getLogger(insertion_livre.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
