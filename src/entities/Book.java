@@ -9,6 +9,15 @@ public class Book {
     String author ;
     double price ;
     Date releaseDate;
+    String coverPic ;
+
+    public void setCoverPic(String coverPic) {
+        this.coverPic = coverPic;
+    }
+
+    public String getCoverPic() {
+        return coverPic;
+    }
 
     public void setId(int id) {
         this.id = id;
