@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class commande {
      int id;
-    int idBook ;
+    String Book ;
     int idClient;
     double price ;
     Date dateC;
@@ -22,8 +22,8 @@ public class commande {
         this.id = id;
     }
 
-    public void setIdBook(int idBook) {
-        this.idBook = idBook;
+    public void setIdBook(String idBook) {
+        this.Book = idBook;
     }
 
     public void setIdClient(int idClient) {
@@ -42,8 +42,8 @@ public class commande {
         return id;
     }
 
-    public int getIdBook() {
-        return idBook;
+    public String getIdBook() {
+        return Book;
     }
 
     public int getIdClient() {

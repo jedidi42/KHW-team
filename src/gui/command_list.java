@@ -5,8 +5,10 @@
  */
 package gui;
 
-import dao.DaoBook;
-import entities.Book;
+
+import dao.DaoCommande;
+
+import entities.commande;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,16 +33,16 @@ public class command_list extends javax.swing.JFrame {
     }
 public void show_order() throws SQLException{
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
-    List<Book> myList = DaoBook.listBook(conn);
+    List<commande> myList = DaoCommande.listCommande(conn);
     DefaultTableModel model=(DefaultTableModel) command_table.getModel();
     Object row[]= new Object[5];
     
     for (int i=0;i<myList.size();i++){
         row[0]=myList.get(i).getId();
-        row[1]=myList.get(i).getTitle();
-        row[2]=myList.get(i).getPrice();
-        row[3]=myList.get(i).getAuthor();
-        row[4]=myList.get(i).getReleaseDate();
+        row[1]=myList.get(i).getIdBook();
+        row[2]=myList.get(i).getIdClient();
+        row[3]=myList.get(i).getPrice();
+        row[4]=myList.get(i).getDateC();
         model.addRow(row);
     }
 }
@@ -59,6 +61,7 @@ public void show_order() throws SQLException{
         jScrollPane1 = new javax.swing.JScrollPane();
         command_table = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +109,15 @@ public void show_order() throws SQLException{
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(34, 167, 240));
+        jButton2.setForeground(new java.awt.Color(240, 240, 240));
+        jButton2.setText("return to menu");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -116,8 +128,10 @@ public void show_order() throws SQLException{
                         .addGap(83, 83, 83)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(322, 322, 322)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(186, 186, 186)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,7 +140,9 @@ public void show_order() throws SQLException{
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -146,6 +162,7 @@ public void show_order() throws SQLException{
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -156,6 +173,16 @@ public void show_order() throws SQLException{
         }
         dispose(); 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   try {
+            new welcome().setVisible(true);
+                new command_list().setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(welcome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +227,7 @@ public void show_order() throws SQLException{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable command_table;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

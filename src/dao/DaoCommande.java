@@ -5,7 +5,7 @@
  */
 package dao;
 
-import entities.Book;
+
 import entities.commande;
 import java.sql.Connection;
 //import java.sql.Date;
@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -46,7 +46,7 @@ public class DaoCommande {
             
             stat.setDouble(2, comm.getPrice());
             stat.setInt(3, comm.getIdClient());
-            stat.setInt(4, comm.getIdBook());
+            stat.setString(4, comm.getIdBook());
 
         
             stat.executeUpdate();
@@ -64,26 +64,26 @@ public class DaoCommande {
     
         public static List<commande> listCommande(Connection conn) {
         try {
-            String requete = "SELECT * FROM book group by idClient";
+            String requete = "SELECT * FROM commande  ";
             Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(requete);
-
-            boolean counter = result.next();
-            List<commande> listcommande = new ArrayList();
-            while (counter) {
-
-                commande newcom = new commande();
-                newcom.setId(result.getInt("id"));
-                newcom.setPrice(result.getDouble("price"));
-                newcom.setPrice(result.getInt("idClient"));
-                newcom.setIdBook(result.getInt("book"));
-                Date date = result.getDate("DateC");
-                newcom.setDateC(date);
-                listcommande.add(newcom);
-                counter = result.next();
-                System.out.println("**********************");
+            List<commande> listcommande;
+            try (ResultSet result = stmt.executeQuery(requete)) {
+                boolean counter = result.next();
+                listcommande = new ArrayList();
+                while (counter) {
+                    
+                    commande newcom = new commande();
+                    newcom.setId(result.getInt("id"));
+                    newcom.setPrice(result.getDouble("price"));
+                    newcom.setPrice(result.getInt("idClient"));
+                    newcom.setIdBook(result.getString("book"));
+                    Date date = result.getDate("DateC");
+                    newcom.setDateC(date);
+                    listcommande.add(newcom);
+                    counter = result.next();
+                    System.out.println("**********************");
+                }
             }
-            result.close();
             return listcommande;
         } catch (SQLException e) {
             System.out.println("vermegalternant.MyProg.Insert()" + e);
