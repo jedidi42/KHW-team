@@ -33,7 +33,7 @@ public void show_order() throws SQLException{
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
     List<Book> myList = DaoBook.listBook(conn);
     DefaultTableModel model=(DefaultTableModel) command_table.getModel();
-    Object row[]= new Object[5];
+    Object row[]= new Object[6];
     
     for (int i=0;i<myList.size();i++){
         row[0]=myList.get(i).getId();
