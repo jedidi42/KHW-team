@@ -75,6 +75,7 @@ public class insertion_livre extends javax.swing.JFrame {
         setBackground(new java.awt.Color(44, 62, 80));
 
         jPanel1.setBackground(new java.awt.Color(248, 148, 6));
+        jPanel1.setMaximumSize(new java.awt.Dimension(20, 20));
 
         jLabel1.setBackground(new java.awt.Color(243, 156, 18));
         jLabel1.setFont(new java.awt.Font("Lucida Handwriting", 1, 24)); // NOI18N
@@ -160,10 +161,7 @@ public class insertion_livre extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("jLabel7");
-
         jTextpic.setBackground(new java.awt.Color(108, 122, 137));
-        jTextpic.setText("Book Title...");
         jTextpic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextpicActionPerformed(evt);
@@ -201,30 +199,29 @@ public class insertion_livre extends javax.swing.JFrame {
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(101, 101, 101))
                                 .addComponent(jLabel5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2)
-                                            .addGap(262, 262, 262))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextpic, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, Short.MAX_VALUE))))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(114, 114, 114)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(64, 64, 64)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                        .addComponent(jButton2)
+                                        .addGap(262, 262, 262))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextpic, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(164, 164, 164))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(41, 41, 41)
                     .addComponent(jLabel6)
-                    .addContainerGap(275, Short.MAX_VALUE)))
+                    .addContainerGap(274, Short.MAX_VALUE)))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(374, Short.MAX_VALUE)
@@ -260,16 +257,13 @@ public class insertion_livre extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextpic, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextpic, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(109, 109, 109))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(308, 308, 308)
@@ -289,17 +283,16 @@ public class insertion_livre extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -311,8 +304,8 @@ public class insertion_livre extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -330,7 +323,7 @@ public class insertion_livre extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // insert new book
-             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
             Book myBook = new Book();
             String title = jTextField1.getText().trim();
             myBook.setTitle(title);
@@ -339,54 +332,60 @@ public class insertion_livre extends javax.swing.JFrame {
             String author = jTextField3.getText().trim();
             myBook.setAuthor(author);
             String daterelease = jTextField5.getText().trim();
-            
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date date = sdf.parse(daterelease);
             myBook.setReleaseDate(new java.sql.Date(date.getTime()));
-            
+
             String coverPic = jTextpic.getText().trim();
             myBook.setCoverPic(coverPic);
             myBook.toString();
             DaoBook.addBook(myBook, conn);
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(insertion_livre.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            new insertion_livre().setVisible(false);
+
+        } catch (ParseException | SQLException ex) {
             Logger.getLogger(insertion_livre.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            new welcome().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(insertion_livre.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        new insertion_livre().setVisible(false);
+
+        dispose();
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
-     public ImageIcon ResizeImage(String imgPath){
+    public ImageIcon ResizeImage(String imgPath) {
         ImageIcon MyImage = new ImageIcon(imgPath);
         Image img = MyImage.getImage();
-        Image newImage = img.getScaledInstance(jLabel7.getWidth(), jLabel7.getHeight(),Image.SCALE_SMOOTH);
+        Image newImage = img.getScaledInstance(jLabel7.getWidth(), jLabel7.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(newImage);
         return image;
     }
-        
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- JFileChooser fileChooser = new JFileChooser();
-         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg","gif","png");
-         fileChooser.addChoosableFileFilter(filter);
-         int result = fileChooser.showSaveDialog(null);
-         if(result == JFileChooser.APPROVE_OPTION){
-             File selectedFile = fileChooser.getSelectedFile();
-             String path = selectedFile.getAbsolutePath();
-             jLabel7.setIcon(ResizeImage(path));
-             String s = path;
-             jTextpic.setText(s);
-              }
-         else if(result == JFileChooser.CANCEL_OPTION){
-             System.out.println("No Data");
-    }                                        
-            // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg", "gif", "png");
+        fileChooser.addChoosableFileFilter(filter);
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            jLabel7.setIcon(ResizeImage(path));
+            String s = path;
+            jTextpic.setText(s);
+        } else if (result == JFileChooser.CANCEL_OPTION) {
+            System.out.println("No Data");
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextpicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextpicActionPerformed

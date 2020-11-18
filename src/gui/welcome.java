@@ -255,8 +255,6 @@ public void show_books() throws SQLException{
             }
         });
 
-        jLabel9.setText("jLabel9");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -439,7 +437,13 @@ public void show_books() throws SQLException{
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       new insertion_livre().setVisible(true);
+        try {
+            new insertion_livre().setVisible(true);
+                new welcome().setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(welcome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

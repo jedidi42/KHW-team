@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 18 nov. 2020 à 15:11
--- Version du serveur :  10.4.11-MariaDB
--- Version de PHP : 7.3.17
+-- Généré le : mer. 18 nov. 2020 à 16:08
+-- Version du serveur :  10.4.14-MariaDB
+-- Version de PHP : 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,13 @@ CREATE TABLE `book` (
   `coverPic` varchar(70) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `book`
+--
+
+INSERT INTO `book` (`id`, `title`, `price`, `author`, `releaseDate`, `coverPic`) VALUES
+(5, 'salma', 256, 'willy', '2020-12-13', 'C:\\Users\\waelk\\OneDrive\\Bureau\\photo guitar\\IMG_1574.JPG');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +58,13 @@ CREATE TABLE `client` (
   `adresse` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `client`
+--
+
+INSERT INTO `client` (`id`, `nom`, `prenom`, `email`, `tel`, `adresse`) VALUES
+(2, 'wael', 'khannassa', 'xazczscdcv', '52203037', 'scqcsdvdsvdsv');
+
 -- --------------------------------------------------------
 
 --
@@ -62,8 +76,18 @@ CREATE TABLE `commande` (
   `dateC` date NOT NULL,
   `price` double NOT NULL,
   `idClient` int(11) NOT NULL,
-  `book` int(11) NOT NULL
+  `book` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id`, `dateC`, `price`, `idClient`, `book`) VALUES
+(25, '2020-11-17', 10, 2, 'dqsc'),
+(33, '2020-11-17', 10, 2, 'dqsc'),
+(34, '2020-11-18', 2, 2, 'moi'),
+(35, '2020-11-18', 256, 2, 'salma');
 
 --
 -- Index pour les tables déchargées
@@ -86,7 +110,6 @@ ALTER TABLE `client`
 --
 ALTER TABLE `commande`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `book` (`book`),
   ADD KEY `idClient` (`idClient`);
 
 --
@@ -97,19 +120,19 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT pour la table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Contraintes pour les tables déchargées
@@ -119,11 +142,7 @@ ALTER TABLE `commande`
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idClient`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`),
-  ADD CONSTRAINT `commande_ibfk_3` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `commande_ibfk_4` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `commande_ibfk_5` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`);
+  ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

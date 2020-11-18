@@ -535,9 +535,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel9"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

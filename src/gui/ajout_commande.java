@@ -43,24 +43,21 @@ public class ajout_commande extends javax.swing.JFrame {
         show_books();
     }
 
-    public void show_books() throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
-        List<Book> myList = DaoBook.listBook(conn);
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-
-        Object row[] = new Object[5];
-
-        for (int i = 1; i < myList.size(); i++) {
-
-            row[0] = myList.get(i).getId();
-            row[1] = myList.get(i).getTitle();
-            row[2] = myList.get(i).getPrice();
-            row[3] = myList.get(i).getAuthor();
-            row[4] = myList.get(i).getReleaseDate();
-            model.addRow(row);
-        }
-
+    public void show_books() throws SQLException{
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
+    List<Book> myList = DaoBook.listBook(conn);
+    DefaultTableModel model=(DefaultTableModel) jTable.getModel();
+    Object row[]= new Object[7];
+    for (int i=0;i<myList.size();i++){
+        row[0]=myList.get(i).getId();
+        row[1]=myList.get(i).getTitle();
+        row[2]=myList.get(i).getPrice();
+        row[3]=myList.get(i).getAuthor();
+        row[4]=myList.get(i).getReleaseDate();
+        row[5]=myList.get(i).getCoverPic();
+        model.addRow(row);
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,6 +86,7 @@ public class ajout_commande extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,11 +180,11 @@ public class ajout_commande extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Title", "price", "Author", "Date release", "chekc"
+                "ID", "Title", "price", "Author", "Date release", "cover", "chekc"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -200,9 +198,18 @@ public class ajout_commande extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable);
         if (jTable.getColumnModel().getColumnCount() > 0) {
-            jTable.getColumnModel().getColumn(5).setPreferredWidth(20);
-            jTable.getColumnModel().getColumn(5).setMaxWidth(20);
+            jTable.getColumnModel().getColumn(6).setPreferredWidth(20);
+            jTable.getColumnModel().getColumn(6).setMaxWidth(20);
         }
+
+        jButton1.setBackground(new java.awt.Color(34, 167, 240));
+        jButton1.setForeground(new java.awt.Color(240, 240, 240));
+        jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -211,13 +218,6 @@ public class ajout_commande extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jText_price, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -237,7 +237,16 @@ public class ajout_commande extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jText_price, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,12 +276,13 @@ public class ajout_commande extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jText_price, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jText_price, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38))
         );
 
@@ -348,6 +358,16 @@ dispose();
 
     }//GEN-LAST:event_jTableMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            new welcome().setVisible(true);
+            new ajout_commande().setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(ajout_commande.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -391,6 +411,7 @@ dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
