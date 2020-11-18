@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 17 nov. 2020 à 13:13
--- Version du serveur :  10.4.14-MariaDB
--- Version de PHP : 7.4.11
+-- Généré le : mer. 18 nov. 2020 à 15:11
+-- Version du serveur :  10.4.11-MariaDB
+-- Version de PHP : 7.3.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,14 +36,34 @@ CREATE TABLE `book` (
   `coverPic` varchar(70) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `book`
+-- Structure de la table `client`
 --
 
-INSERT INTO `book` (`id`, `title`, `price`, `author`, `releaseDate`, `coverPic`) VALUES
-(2, 'sqc', 625, '', '2020-05-20', NULL),
-(3, 'dqsc', 10, 'dqsd', '2020-05-03', NULL),
-(4, 'moi', 2, 'moi', '1111-11-11', NULL);
+CREATE TABLE `client` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(20) NOT NULL,
+  `prenom` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `tel` varchar(15) NOT NULL,
+  `adresse` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commande`
+--
+
+CREATE TABLE `commande` (
+  `id` int(11) NOT NULL,
+  `dateC` date NOT NULL,
+  `price` double NOT NULL,
+  `idClient` int(11) NOT NULL,
+  `book` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Index pour les tables déchargées
@@ -56,6 +76,20 @@ ALTER TABLE `book`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `book` (`book`),
+  ADD KEY `idClient` (`idClient`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -63,7 +97,33 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT pour la table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idClient`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`),
+  ADD CONSTRAINT `commande_ibfk_3` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `commande_ibfk_4` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `commande_ibfk_5` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
