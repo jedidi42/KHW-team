@@ -6,13 +6,24 @@
 package gui;
 
 import dao.DaoBook;
+import dao.DaoCommande;
 import entities.Book;
+import entities.commande;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -35,28 +46,19 @@ public class ajout_commande extends javax.swing.JFrame {
     public void show_books() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
         List<Book> myList = DaoBook.listBook(conn);
-        DefaultTableModel model = (DefaultTableModel) book_table.getModel();
-    
-        Object row[] = new Object[6];
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+
+        Object row[] = new Object[5];
 
         for (int i = 1; i < myList.size(); i++) {
 
-            row[1] = myList.get(i).getId();
-            row[2] = myList.get(i).getTitle();
-            row[3] = myList.get(i).getPrice();
-            row[4] = myList.get(i).getAuthor();
-            row[5] = myList.get(i).getReleaseDate();
+            row[0] = myList.get(i).getId();
+            row[1] = myList.get(i).getTitle();
+            row[2] = myList.get(i).getPrice();
+            row[3] = myList.get(i).getAuthor();
+            row[4] = myList.get(i).getReleaseDate();
             model.addRow(row);
         }
-
-    }
-
-    private void book_tableMouseClicked(java.awt.event.MouseEvent evt) {
-        // display the selected book in textfield
-        int i = book_table.getSelectedRow();
-        TableModel model = book_table.getModel();
-
-        jText_price.setText(model.getValueAt(i, 2).toString());
 
     }
 
@@ -77,7 +79,7 @@ public class ajout_commande extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        text_name = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
@@ -85,8 +87,8 @@ public class ajout_commande extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jText_price = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        book_table = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,11 +137,11 @@ public class ajout_commande extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(240, 240, 240));
         jLabel6.setText("Phone :");
 
-        jTextField1.setBackground(new java.awt.Color(108, 122, 137));
-        jTextField1.setText("first name..");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        text_name.setBackground(new java.awt.Color(108, 122, 137));
+        text_name.setText("first name..");
+        text_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                text_nameActionPerformed(evt);
             }
         });
 
@@ -160,7 +162,6 @@ public class ajout_commande extends javax.swing.JFrame {
         jLabel7.setText("Total Price :");
 
         jText_price.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jText_price.setText("price");
         jText_price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jText_priceActionPerformed(evt);
@@ -176,26 +177,31 @@ public class ajout_commande extends javax.swing.JFrame {
             }
         });
 
-        book_table.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "", "ID", "Title", "Price", "Author", "release_date"
+                "ID", "Title", "price", "Author", "Date release", "chekc"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(book_table);
-        if (book_table.getColumnModel().getColumnCount() > 0) {
-            book_table.getColumnModel().getColumn(0).setPreferredWidth(20);
-            book_table.getColumnModel().getColumn(0).setMaxWidth(20);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(5).setPreferredWidth(20);
+            jTable.getColumnModel().getColumn(5).setMaxWidth(20);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -209,7 +215,7 @@ public class ajout_commande extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jText_price, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)
+                        .addGap(108, 108, 108)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -217,7 +223,7 @@ public class ajout_commande extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(text_name, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -230,8 +236,8 @@ public class ajout_commande extends javax.swing.JFrame {
                                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel2)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +247,7 @@ public class ajout_commande extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(text_name, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -259,9 +265,9 @@ public class ajout_commande extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -285,20 +291,62 @@ public class ajout_commande extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(818, 716));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void text_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_text_nameActionPerformed
 
     private void jText_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_priceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jText_priceActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        int i = jTable.getSelectedRow();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
+            commande mycommand = new commande();
+            String title = model.getValueAt(i, 1).toString();
+            mycommand.setIdBook(title);
+            
+            String price = jText_price.getText().trim();
+            
+            mycommand.setPrice(Double.parseDouble(price));
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
+            Date date = new Date();
+            String mdate = format.format(date);
+             java.util.Date date1 = format.parse(mdate);
+            Date dateC =new java.sql.Date(date1.getTime());
+            mycommand.setDateC(new java.sql.Date(dateC.getTime()));
+            String name = text_name.getText().trim();
+             String query = "SELECT id from `client` where client.nom = ? ";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt("id");
+            System.out.println(id);
+              mycommand.setIdClient(id);
+            DaoCommande.addCommande(mycommand, conn); 
+             new command_list().setVisible(true);
+                new ajout_commande().setVisible(false);
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(ajout_commande.class.getName()).log(Level.SEVERE, null, ex);
+        }
+dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        int i = jTable.getSelectedRow();
+        TableModel model = jTable.getModel();
+
+        jText_price.setText(model.getValueAt(i, 2).toString());
+
+    }//GEN-LAST:event_jTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -332,7 +380,9 @@ public class ajout_commande extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
+                   
                     new ajout_commande().setVisible(true);
+                   
                 } catch (SQLException ex) {
                     Logger.getLogger(ajout_commande.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -341,7 +391,6 @@ public class ajout_commande extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable book_table;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -352,12 +401,13 @@ public class ajout_commande extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jText_price;
+    private javax.swing.JTextField text_name;
     // End of variables declaration//GEN-END:variables
 }
