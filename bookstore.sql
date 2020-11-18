@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 16 nov. 2020 à 19:21
+-- Généré le : mer. 18 nov. 2020 à 14:46
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.3.17
 
@@ -41,9 +41,12 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `title`, `price`, `author`, `releaseDate`, `coverPic`) VALUES
-(2, 'sqc', 625, '', '2020-05-20', NULL),
 (3, 'dqsc', 10, 'dqsd', '2020-05-03', NULL),
-(4, 'moi', 2, 'moi', '1111-11-11', NULL);
+(4, 'moi', 2, 'moi', '1111-11-11', NULL),
+(5, 'wesh', 22, 'ena', '2010-05-22', NULL),
+(6, 'wesh', 22, 'ena', '2010-05-22', NULL),
+(15, 'wa3', 55, 'le5er', '2020-11-10', 'fffff'),
+(16, '88', 88, '88', '1111-11-11', 'C:\\Users\\hamza jedidi\\Desktop\\0.png');
 
 -- --------------------------------------------------------
 
@@ -71,7 +74,7 @@ CREATE TABLE `commande` (
   `dateC` date NOT NULL,
   `price` double NOT NULL,
   `idClient` int(11) NOT NULL,
-  `book` varchar(50) NOT NULL
+  `book` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -95,6 +98,7 @@ ALTER TABLE `client`
 --
 ALTER TABLE `commande`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `book` (`book`),
   ADD KEY `idClient` (`idClient`);
 
 --
@@ -105,7 +109,7 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT pour la table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `client`
@@ -117,7 +121,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
@@ -128,7 +132,10 @@ ALTER TABLE `commande`
 --
 ALTER TABLE `commande`
   ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idClient`) REFERENCES `book` (`id`),
-  ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`);
+  ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`),
+  ADD CONSTRAINT `commande_ibfk_3` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `commande_ibfk_4` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `commande_ibfk_5` FOREIGN KEY (`idClient`) REFERENCES `client` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
