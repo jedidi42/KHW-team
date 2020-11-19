@@ -1,10 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,7 +23,7 @@ public class FrameDashboard extends JFrame {
 	private Image x = new ImageIcon(FrameDashboard.class.getResource("x.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
 	private intro introduction ;
 	private JPanel contentPane;
-
+	public command_list Commande_list ; 
 	/**
 	 * Launch the application.
 	 */
@@ -103,10 +104,26 @@ public class FrameDashboard extends JFrame {
 		paneIntro.add(lblIntro);
 		
 		JPanel paneListC = new JPanel();
-		paneListC.addMouseListener(new PanelButtonMouseAdapter(paneListC));
+		paneListC.addMouseListener(new PanelButtonMouseAdapter(paneListC)
+{
+			
+			@Override
+			public void mouseClicked (MouseEvent e)
+			{
+				 dispose();
+				 try {
+					new command_list().setVisible(true) ;
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 
+			}
+				});
 		paneListC.setBackground(new Color(47, 79, 79));
 		paneListC.setBounds(0, 180, 224, 40);
 		paneMenu.add(paneListC);
+		
 		paneListC.setLayout(null);
 		
 		JLabel lblListCommande = new JLabel("LIST COMMANDE");
@@ -117,7 +134,22 @@ public class FrameDashboard extends JFrame {
 		paneListC.add(lblListCommande);
 		
 		JPanel paneAjoutC = new JPanel();
-		paneAjoutC.addMouseListener(new PanelButtonMouseAdapter(paneAjoutC));
+		paneAjoutC.addMouseListener(new PanelButtonMouseAdapter(paneAjoutC)
+{
+			
+			@Override
+			public void mouseClicked (MouseEvent e)
+			{
+				 dispose();
+				 try {
+					new ajout_commande().setVisible(true) ;
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 
+			}
+				});
 		paneAjoutC.setBackground(new Color(47, 79, 79));
 		paneAjoutC.setBounds(0, 220, 224, 40);
 		paneMenu.add(paneAjoutC);
@@ -131,7 +163,17 @@ public class FrameDashboard extends JFrame {
 		paneAjoutC.add(lblAjoutCommande);
 		
 		JPanel paneInsertion = new JPanel();
-		paneInsertion.addMouseListener(new PanelButtonMouseAdapter(paneInsertion));
+		paneInsertion.addMouseListener(new PanelButtonMouseAdapter(paneInsertion)
+{
+			
+			@Override
+			public void mouseClicked (MouseEvent e)
+			{
+				 dispose();
+				 new insertion_livre().setVisible(true) ;
+				 
+			}
+				});
 		paneInsertion.setBackground(new Color(47, 79, 79));
 		paneInsertion.setBounds(0, 260, 224, 40);
 		paneMenu.add(paneInsertion);
@@ -145,7 +187,22 @@ public class FrameDashboard extends JFrame {
 		paneInsertion.add(lblInsertionLivre);
 		
 		JPanel paneWelcome = new JPanel();
-		paneWelcome.addMouseListener(new PanelButtonMouseAdapter(paneWelcome));
+		paneWelcome.addMouseListener(new PanelButtonMouseAdapter(paneWelcome)
+{
+			
+			@Override
+			public void mouseClicked (MouseEvent e)
+			{
+				 dispose();
+				 try {
+					new welcome().setVisible(true) ;
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 
+			}
+				});
 		paneWelcome.setBackground(new Color(47, 79, 79));
 		paneWelcome.setBounds(0, 300, 224, 40);
 		paneMenu.add(paneWelcome);

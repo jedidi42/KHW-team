@@ -37,7 +37,7 @@ public class DaoBook {
         PreparedStatement stat;
 
         try {
-            stat = conn.prepareStatement("insert into book " + " (title,price, author,releaseDate)" + " values (?, ? ,?,?)");
+            stat = conn.prepareStatement("insert into book " + " (title,price, author,releaseDate,coverPic)" + " values (?, ? ,?,?,?)");
             stat.setString(1, book.getTitle());
             stat.setDouble(2, book.getPrice());
             stat.setString(3, book.getAuthor());
@@ -45,6 +45,8 @@ public class DaoBook {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date date = sdf.parse(book.getReleaseDate().toString());
             stat.setDate(4, (new java.sql.Date(date.getTime())));
+            
+            stat.setString(5, book.getCoverPic());
             stat.executeUpdate();
            System.out.print("the book is inserted !");
                         System.out.println("**********************");
@@ -73,6 +75,7 @@ public class DaoBook {
                 newbook.setAuthor(result.getString("author"));
                 Date date = result.getDate("releaseDate");
                 newbook.setReleaseDate(date);
+                newbook.setCoverPic(result.getString("coverPic"));
                 listbooks.add(newbook);
                 counter = result.next();
                 System.out.println("**********************");
