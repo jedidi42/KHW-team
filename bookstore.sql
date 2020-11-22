@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 18 nov. 2020 à 16:08
+-- Généré le : Dim 22 nov. 2020 à 21:31
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
@@ -41,7 +41,9 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`id`, `title`, `price`, `author`, `releaseDate`, `coverPic`) VALUES
-(5, 'salma', 256, 'willy', '2020-12-13', 'C:\\Users\\waelk\\OneDrive\\Bureau\\photo guitar\\IMG_1574.JPG');
+(5, 'salma', 256, 'willy', '2020-12-13', 'C:\\Users\\waelk\\OneDrive\\Bureau\\photo guitar\\IMG_1574.JPG'),
+(9, 'hamza', 245, 'wael', '2020-12-17', 'C:\\Users\\waelk\\OneDrive\\Bureau\\photo guitar\\IMG_1584.JPG'),
+(10, 'book', 25, 'daz', '2020-12-12', 'C:\\Users\\waelk\\OneDrive\\Bureau\\photo guitar\\IMG_1576.JPG');
 
 -- --------------------------------------------------------
 
@@ -84,10 +86,27 @@ CREATE TABLE `commande` (
 --
 
 INSERT INTO `commande` (`id`, `dateC`, `price`, `idClient`, `book`) VALUES
-(25, '2020-11-17', 10, 2, 'dqsc'),
-(33, '2020-11-17', 10, 2, 'dqsc'),
-(34, '2020-11-18', 2, 2, 'moi'),
-(35, '2020-11-18', 256, 2, 'salma');
+(44, '2020-11-20', 245, 2, 'hamza'),
+(45, '2020-11-20', 256, 2, 'salma'),
+(46, '2020-11-20', 25, 2, 'book');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `name` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`name`, `password`) VALUES
+('wael', 'wael');
 
 --
 -- Index pour les tables déchargées
@@ -120,7 +139,7 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT pour la table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `client`
@@ -132,7 +151,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Contraintes pour les tables déchargées

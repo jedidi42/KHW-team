@@ -21,13 +21,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author waelk
  */
-public class command_list extends javax.swing.JFrame {
+public class Command_list extends javax.swing.JFrame {
 
     /**
      * Creates new form command_list
      * @throws java.sql.SQLException
      */
-    public command_list() throws SQLException {
+    public Command_list() throws SQLException  {
         initComponents();
           show_order();
     }
@@ -35,7 +35,7 @@ public void show_order() throws SQLException{
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "");
     List<commande> myList = DaoCommande.listCommande(conn);
     DefaultTableModel model=(DefaultTableModel) command_table.getModel();
-    Object row[]= new Object[6];
+    Object row[]= new Object[5];
     
     for (int i=0;i<myList.size();i++){
         row[0]=myList.get(i).getId();
@@ -167,19 +167,19 @@ public void show_order() throws SQLException{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            new command_list().setVisible(false);
+            new Command_list().setVisible(false);
         } catch (SQLException ex) {
-            Logger.getLogger(command_list.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Command_list.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
    try {
-            new welcome().setVisible(true);
-                new command_list().setVisible(false);
+            new Menu().setVisible(true);
+                new Command_list().setVisible(false);
         } catch (SQLException ex) {
-            Logger.getLogger(welcome.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -201,14 +201,15 @@ public void show_order() throws SQLException{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Command_list.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -216,9 +217,9 @@ public void show_order() throws SQLException{
             @Override
             public void run() {
                 try {
-                    new command_list().setVisible(true);
+                    new Command_list().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(command_list.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Command_list.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

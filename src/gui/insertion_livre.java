@@ -30,12 +30,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author waelk
  */
-public class insertion_livre extends javax.swing.JFrame {
+public class Insertion_livre extends javax.swing.JFrame {
 
     /**
      * Creates new form insertion_livre
      */
-    public insertion_livre() {
+    public Insertion_livre() {
         initComponents();
     }
 
@@ -341,21 +341,17 @@ public class insertion_livre extends javax.swing.JFrame {
             myBook.setCoverPic(coverPic);
             myBook.toString();
             DaoBook.addBook(myBook, conn);
-            new insertion_livre().setVisible(false);
+            new Insertion_livre().setVisible(false);
 
         } catch (ParseException | SQLException ex) {
-            Logger.getLogger(insertion_livre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Insertion_livre.class.getName()).log(Level.SEVERE, null, ex);
         }
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            new welcome().setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(insertion_livre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        new insertion_livre().setVisible(false);
+        new Menu().setVisible(true);
+        new Insertion_livre().setVisible(false);
 
         dispose();
 
@@ -409,20 +405,21 @@ public class insertion_livre extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Insertion_livre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new insertion_livre().setVisible(true);
+                new Insertion_livre().setVisible(true);
             }
         });
     }
